@@ -10,8 +10,14 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    public function curso(){
-        return $this->hasOne('Sanleo\Curso');
+    public function cursos(){
+        return $this->hasMany('Sanleo\Curso');
+
+    }
+
+    public function alumnos(){
+        return $this->hasMany('Sanleo\Alumno');
+
     }
 
     /**
