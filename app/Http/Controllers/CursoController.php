@@ -14,6 +14,7 @@ class CursoController extends Controller
     public function index()
     {
         //
+        return 'modulo cursos';
     }
 
     /**

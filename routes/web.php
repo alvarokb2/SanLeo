@@ -29,3 +29,8 @@ Route::post('/guardar_usuario', 'AdminController@guardar_usuario')->name('guarda
 
 //Gestión de Informe
 Route::get('/informes', 'AdminController@informes')->name('informes');
+
+
+//Educadora routes
+//Gestion de cursos
+Route::resource('cursos', 'CursoController');

@@ -4,6 +4,7 @@ namespace Sanleo\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -27,6 +28,9 @@ class HomeController extends Controller
         $rol = Auth::user()->rol;
         if($rol == 'admin'){
             return redirect('usuarios');
+        }
+        elseif($rol == 'educadora'){
+            return Redirect::route('cursos.index');
         }
         return view('home')->with('rol', $rol);
     }
