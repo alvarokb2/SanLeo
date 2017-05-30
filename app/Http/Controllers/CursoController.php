@@ -3,6 +3,10 @@
 namespace Sanleo\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Sanleo\Curso;
+use Sanleo\User;
+use Illuminate\Support\Facades\Redirect;
 
 class CursoController extends Controller
 {
@@ -14,7 +18,7 @@ class CursoController extends Controller
     public function index()
     {
         //
-        return 'modulo cursos';
+        return view('educadora.cursos.cursos');
     }
 
     /**
@@ -25,6 +29,7 @@ class CursoController extends Controller
     public function create()
     {
         //
+        return view('educadora.cursos.nuevo');
     }
 
     /**
@@ -36,6 +41,15 @@ class CursoController extends Controller
     public function store(Request $request)
     {
         //
+        /*
+        $curso = Curso::create([
+            'id_educadora' => Auth::user()->id,
+            'name' => $request->name]);
+        $curso->save();
+
+        return Redirect::route('cursos.index');*/
+
+        $curso = Curso::where('id', 3)->get();
     }
 
     /**

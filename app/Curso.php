@@ -14,4 +14,5 @@ class Curso extends Model
     public function educadora(){
         return $this->belongsTo('Sanleo\User');
     }
+    
 }
