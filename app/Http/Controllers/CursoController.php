@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Sanleo\Curso;
 use Sanleo\User;
 use Illuminate\Support\Facades\Redirect;
+use Sanleo\CursoUser;
 
 class CursoController extends Controller
 {
@@ -18,7 +19,8 @@ class CursoController extends Controller
     public function index()
     {
         //
-        return view('educadora.cursos.cursos');
+        $cursos = Auth::user()->cursos();
+        return view('educadora.cursos.cursos')->with('cursos', $cursos);
     }
 
     /**
@@ -40,17 +42,18 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        /*
         $curso = Curso::create([
-            'id_educadora' => Auth::user()->id,
             'name' => $request->name]);
         $curso->save();
 
-        return Redirect::route('cursos.index');*/
+        $cursouser = CursoUser::create([
+            'id_curso' => $curso->id,
+            'id_user' => Auth::user()->id,
+        ]);
+        $cursouser->save();
+        return Redirect::route('cursos.index');
 
-        $curso = Curso::where('id', 3)->get();
-    }
+  }
 
     /**
      * Display the specified resource.
