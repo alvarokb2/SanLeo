@@ -3,11 +3,10 @@
 namespace Sanleo\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 use Sanleo\Curso;
 use Sanleo\User;
-use Illuminate\Support\Facades\Redirect;
-use Sanleo\CursoUser;
+use Sanleo\Http\Requests\CursoRequest;
 
 class CursoController extends Controller
 {
@@ -18,9 +17,9 @@ class CursoController extends Controller
      */
     public function index()
     {
-        //
-        $cursos = Auth::user()->cursos();
-        return view('educadora.cursos.cursos')->with('cursos', $cursos);
+        $cursos = Curso::orderBy('id','DESC')->paginate();;
+        return view('cursos.index', compact('cursos'));
+
     }
 
     /**
@@ -30,8 +29,7 @@ class CursoController extends Controller
      */
     public function create()
     {
-        //
-        return view('educadora.cursos.nuevo');
+        return view('cursos.create', compact('cursos'));
     }
 
     /**
@@ -40,20 +38,14 @@ class CursoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CursoRequest $request)
     {
-        $curso = Curso::create([
-            'name' => $request->name]);
+        $curso = new Curso;
+        $curso->name  = $request->name;
+        $curso->id_user = $request->id_user;
         $curso->save();
-
-        $cursouser = CursoUser::create([
-            'id_curso' => $curso->id,
-            'id_user' => Auth::user()->id,
-        ]);
-        $cursouser->save();
-        return Redirect::route('cursos.index');
-
-  }
+        return redirect()->route('cursos.index')->with('info', 'Curso agregado exitosamente');
+    }
 
     /**
      * Display the specified resource.
@@ -63,7 +55,8 @@ class CursoController extends Controller
      */
     public function show($id)
     {
-        //
+        $cursos = Curso::find($id);
+        return view('cursos.show', compact('cursos'));
     }
 
     /**
@@ -74,7 +67,8 @@ class CursoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cursos = Curso::find($id);
+        return view('cursos.edit', compact('cursos'));
     }
 
     /**
@@ -84,9 +78,14 @@ class CursoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CursoRequest $request, $id)
     {
-        //
+        $curso = Curso::find($id);
+
+        $curso->name  = $request->name;
+        $curso->id_user = $request->id_user;
+        $curso->save();
+        return redirect()->route('cursos.index')->with('message_edit', 'Curso editado exitosamente');
     }
 
     /**
@@ -97,6 +96,8 @@ class CursoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $curso = Curso::find($id);
+        $curso->delete();
+        return back()->with('message', 'Curso eliminado exitosamente');
     }
 }

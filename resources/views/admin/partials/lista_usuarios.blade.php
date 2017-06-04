@@ -24,6 +24,9 @@
                         <td>
                             <a href="{{route('editar_usuario', $usuario->id)}}">Editar</a>
                         </td>
+                        <td>
+                            <a href="{{route('cursos.index')}}">Ver Cursos</a>
+                        </td>
                 </tr>
                 @endforeach
                 </tbody>

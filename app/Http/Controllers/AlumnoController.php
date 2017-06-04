@@ -3,6 +3,10 @@
 namespace Sanleo\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Sanleo\Curso;
+use Sanleo\User;
+use Sanleo\Alumno;
+use Sanleo\Http\Requests\AlumnoRequest;
 
 class AlumnoController extends Controller
 {
@@ -13,7 +17,9 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        //
+        $alumnos = Alumno::orderBy('id','DESC')->paginate();;
+        return view('alumnos.index', compact('alumnos'));
+
     }
 
     /**
@@ -23,7 +29,7 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        //
+        return view('alumnos.create', compact('alumnos'));
     }
 
     /**
@@ -32,9 +38,16 @@ class AlumnoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AlumnoRequest $request)
     {
-        //
+        $alumno = new Alumno;
+        $alumno->name  = $request->name;
+        $alumno->edad  = $request->edad;
+        $alumno->fecha_nacimiento  = $request->fecha_nacimiento;
+        $alumno->id_curso  = $request->id_curso;
+        $alumno->id_apoderado = $request->id_apoderado;
+        $alumno->save();
+        return redirect()->route('alumnos.index')->with('info', 'Alumno agregado exitosamente');
     }
 
     /**
@@ -45,7 +58,8 @@ class AlumnoController extends Controller
      */
     public function show($id)
     {
-        //
+        $alumnos = Alumno::find($id);
+        return view('alumnos.show', compact('alumnos'));
     }
 
     /**
@@ -56,7 +70,8 @@ class AlumnoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $alumnos = Alumno::find($id);
+        return view('alumnos.edit', compact('alumnos'));
     }
 
     /**
@@ -66,9 +81,16 @@ class AlumnoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AlumnoRequest $request, $id)
     {
-        //
+        $alumno = Alumno::find($id);
+
+        $alumno->name  = $request->name;
+        $alumno->edad  = $request->edad;
+        $alumno->fecha_nacimiento  = $request->fecha_nacimiento;
+        $alumno->id_curso  = $request->id_curso;
+        $alumno->id_apoderado = $request->id_apoderado;
+        return redirect()->route('alumnos.index')->with('message_edit', 'Alumno editado exitosamente');
     }
 
     /**
@@ -79,6 +101,8 @@ class AlumnoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $alumno = Alumno::find($id);
+        $alumno->delete();
+        return back()->with('message', 'Alumno eliminado exitosamente');
     }
 }
