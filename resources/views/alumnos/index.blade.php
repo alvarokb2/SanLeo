@@ -38,10 +38,10 @@
                         <!--  <a href=" route('alumnos.index', $alumno->id) " class="btn btn-default">Ver alumnos</a> -->
                     </td>
                     <td>
-                        <a href="{{ route('alumnos.edit', $curso->id) }} " class="btn btn-default">Editar</a>
+                        <a href="{{ route('alumnos.edit', $alumno->id) }} " class="btn btn-default">Editar</a>
                     </td>
                     <td>
-                        <form action="{{ route('alumnos.destroy', $curso->id) }}" method ="POST">
+                        <form action="{{ route('alumnos.destroy', $alumno->id) }}" method ="POST">
                         {{ csrf_field() }}
                             <input type="hidden" name="_method" value="DELETE">
                         <button class="btn btn-default">Borrar</button>
