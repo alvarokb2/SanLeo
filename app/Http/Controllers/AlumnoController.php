@@ -90,6 +90,7 @@ class AlumnoController extends Controller
         $alumno->fecha_nacimiento  = $request->fecha_nacimiento;
         $alumno->id_curso  = $request->id_curso;
         $alumno->id_apoderado = $request->id_apoderado;
+        $alumno->save();
         return redirect()->route('alumnos.index')->with('message_edit', 'Alumno editado exitosamente');
     }
 
