@@ -30,11 +30,9 @@ Route::post('/guardar_usuario', 'AdminController@guardar_usuario')->name('guarda
 Route::get('/informes', 'AdminController@informes')->name('informes');
 
 
-<<<<<<< HEAD
 //Rutas para cursos
-Route::resource('cursos','CursoController');
 Route::resource('alumnos','AlumnoController');
-=======
+
 //Educadora routes
 //Gestion de cursos
 Route::resource('cursos', 'CursoController');
@@ -42,4 +40,3 @@ Route::resource('cursos', 'CursoController');
 
 Route::resource('users', 'UserController');
 Route::post('/buscar_usuario', 'UserController@search')->name('users.search');
->>>>>>> alvaro

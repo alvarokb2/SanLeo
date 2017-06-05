@@ -42,22 +42,19 @@ class CursoController extends Controller
     {
         $curso = new Curso;
         $curso->name  = $request->name;
-        $curso->id_user = $request->id_user;
+        $curso->id_user = Auth::user()->id_user;
         $curso->save();
-<<<<<<< HEAD
-        return redirect()->route('cursos.index')->with('info', 'Curso agregado exitosamente');
-    }
-=======
+
         $user = Auth::user();
+
         $cursouser = CursoUser::create([
             'id_curso' => $curso->id,
             'id_user' => $user->id,
         ]);
         $cursouser->save();
-        return Redirect::route('cursos.index');
+        return redirect()->route('cursos.index')->with('info', 'Curso agregado exitosamente');
 
   }
->>>>>>> alvaro
 
     /**
      * Display the specified resource.
