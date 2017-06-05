@@ -12,19 +12,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    public function cursos(){
-        $cursousers = CursoUser::where('id_user', $this->id)->get();
-        $cursos = null;
-        foreach($cursousers as $cursouser) {
-            $curso = (Curso::where('id', $cursouser->id_curso)->get());
-            if($cursos == null){
-                $cursos = $curso;
-            }
-            else{
-                $cursos->push($curso[0]);
-            }
-        }
-        return $cursos;
+    public function cursos()
+    {
+        return $this->belongsToMany('Sanleo\Curso', 'curso_users', 'id_user', 'id_curso');
     }
 
     public function alumnos(){
@@ -38,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'rol',
     ];
 
     /**

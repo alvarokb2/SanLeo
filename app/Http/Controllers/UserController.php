@@ -3,9 +3,20 @@
 namespace Sanleo\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Sanleo\User;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin')->except('show');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +25,8 @@ class UserController extends Controller
     public function index()
     {
         //
+        $usuarios = User::all();
+        return view('admin.usuarios.usuarios')->with('usuarios', $usuarios);
     }
 
     /**
@@ -24,6 +37,7 @@ class UserController extends Controller
     public function create()
     {
         //
+        return view('admin.usuarios.nuevo');
     }
 
     /**
@@ -35,6 +49,27 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        $exist = User::where('email', $request->email)->get();
+        if($exist->count() > 0){
+            Session::flash('errors', 'El email ya se encuentra registrado');
+            return Redirect::route('users.create');
+        }
+        else{
+
+            $pos = strpos($request->email, '@');
+            $pass = substr($request->email, 0, $pos);
+            $rol = 'apoderado';
+            if($request->rol){
+                $rol = $request->rol;
+            }
+            $user = User::create([
+                'name'  => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($pass),
+                'rol'   => $rol,
+            ]);
+            return Redirect::route('users.index');
+        }
     }
 
     /**
@@ -57,6 +92,9 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        $user = User::where('id', $id)->get();
+        //echo $user;
+        return view('admin.usuarios.editar')->with('user', $user);
     }
 
     /**
@@ -69,6 +107,11 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->save();
+        return Redirect::route('users.index');
+        //return 'UPDATE USER';
     }
 
     /**
@@ -80,5 +123,16 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return Redirect::route('users.index');
     }
+
+    public function search(Request $request){
+        $all = User::where('name', 'like','%'.$request->busqueda.'%')
+            ->get();
+        return view('admin.usuarios.usuarios')
+            ->with('usuarios', $all);
+    }
+
 }

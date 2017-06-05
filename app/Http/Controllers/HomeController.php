@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         $rol = Auth::user()->rol;
         if($rol == 'admin'){
-            return redirect('usuarios');
+            return Redirect::route('users.index');
         }
         elseif($rol == 'educadora'){
             return Redirect::route('cursos.index');

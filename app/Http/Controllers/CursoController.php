@@ -45,10 +45,10 @@ class CursoController extends Controller
         $curso = Curso::create([
             'name' => $request->name]);
         $curso->save();
-
+        $user = Auth::user();
         $cursouser = CursoUser::create([
             'id_curso' => $curso->id,
-            'id_user' => Auth::user()->id,
+            'id_user' => $user->id,
         ]);
         $cursouser->save();
         return Redirect::route('cursos.index');

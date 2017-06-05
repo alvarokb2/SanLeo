@@ -22,7 +22,12 @@
                             {{$usuario->name}}
                         </td>
                         <td>
-                            <a href="{{route('editar_usuario', $usuario->id)}}">Editar</a>
+                            <a href="{{route('users.edit', $usuario->id)}}" class="btn btn-primary">Editar</a>
+                        </td>
+                        <td>
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $usuario->id]]) !!}
+                            {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
+                            {!! Form::close() !!}
                         </td>
                 </tr>
                 @endforeach
