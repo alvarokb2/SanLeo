@@ -43,7 +43,8 @@ class AdminController extends Controller
 
     //
     public function guardar_usuario(Request $request){
-        return 'guardado';
+        $pass = preg_split('@',$request->email, 1);
+        return $pass;
     }
 
 
