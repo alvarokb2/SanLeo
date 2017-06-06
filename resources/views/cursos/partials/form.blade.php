@@ -3,9 +3,5 @@
     {!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-    {!! Form::label('id_user', 'Nombre educadora') !!}
-    {!! Form::text('short', null, ['class' => 'form-control']) !!}
-</div>
-<div class="form-group">
-    {!! Form::submit('ENVIAR', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
 </div>

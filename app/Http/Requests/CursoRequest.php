@@ -24,7 +24,7 @@ class CursoRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'unique'],
+            'name' => 'required|unique:cursos',
         ];
     }
 }

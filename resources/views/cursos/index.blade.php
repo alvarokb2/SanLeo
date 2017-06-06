@@ -27,7 +27,7 @@
                     <td>
                         <strong>{{ $curso->name }}</strong>
                     </td>
-                    <td>{{ $curso->id_user}}</td>
+                    <td>{{ $curso->users()->first()->name}}</td>
 
                     <td>
                         <a href=" {{route('alumnos.index')}}" class="btn btn-default">Ver alumnos</a>
