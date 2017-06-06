@@ -58,12 +58,10 @@ class UserController extends Controller
 
             $pos = strpos($request->email, '@');
             $pass = substr($request->email, 0, $pos);
-            $rol = 'apoderado';
-            if($request->rol){
-                $rol = $request->rol;
-            }
+            $rol = $request->rol;
+
             $user = User::create([
-                'name'  => $request->name,
+                    'name'  => $request->name,
                 'email' => $request->email,
                 'password' => bcrypt($pass),
                 'rol'   => $rol,
@@ -109,6 +107,7 @@ class UserController extends Controller
         //
         $user = User::findOrFail($id);
         $user->name = $request->name;
+        $user->rol = $request->rol;
         $user->save();
         return Redirect::route('users.index');
         //return 'UPDATE USER';

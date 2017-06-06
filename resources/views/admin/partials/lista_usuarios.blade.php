@@ -30,7 +30,9 @@
                             {!! Form::close() !!}
                         </td>
                         <td>
-                            <a href="{{route('cursos.index')}}">Ver Cursos</a>
+                            @if($usuario->rol == 'educadora')
+                                <a href="{{route('cursos.show', $usuario->id)}}">Ver Cursos</a>
+                            @endif
                         </td>
                 </tr>
                 @endforeach

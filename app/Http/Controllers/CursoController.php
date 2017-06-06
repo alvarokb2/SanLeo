@@ -25,6 +25,7 @@ class CursoController extends Controller
 
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -63,8 +64,9 @@ class CursoController extends Controller
      */
     public function show($id)
     {
-        $cursos = Curso::find($id);
-        return view('cursos.show', compact('cursos'));
+        $user = User::findOrFail($id);
+        $cursos = $user->cursos()->get();
+        return view('cursos.index', compact('cursos'));
     }
 
     /**
