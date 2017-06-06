@@ -17,7 +17,7 @@ class CreateAreasTable extends Migration
             $table->increments('id');
             $table->string('name');
             
-            $table->integer('id_informe')->unsigned();
+            $table->integer('id_informe')->unsigned()->nullable();
             $table->foreign('id_informe')->references('id')->on('informes');
             
             $table->timestamps();

@@ -31,6 +31,10 @@ Route::post('/guardar_usuario', 'AdminController@guardar_usuario')->name('guarda
 Route::get('/informes', 'AdminController@informes')->name('informes');
 
 
-//Rutas para cursos
+//Rutas para los controladores
 Route::resource('cursos','CursoController');
 Route::resource('alumnos','AlumnoController');
+Route::resource('informes','InformeController');
+Route::resource('areas','AreaController');
+Route::resource('subareas','SubareaController');
+Route::resource('items','ItemController');

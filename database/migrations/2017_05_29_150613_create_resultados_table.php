@@ -17,10 +17,10 @@ class CreateResultadosTable extends Migration
             $table->increments('id');
             $table->string('resultados');
 
-            $table->integer('id_alumno')->unsigned();
+            $table->integer('id_alumno')->unsigned()>nullable();
             $table->foreign('id_alumno')->references('id')->on('alumnos');
 
-            $table->integer('id_informe')->unsigned();
+            $table->integer('id_informe')->unsigned()>nullable();
             $table->foreign('id_informe')->references('id')->on('informes');
 
 

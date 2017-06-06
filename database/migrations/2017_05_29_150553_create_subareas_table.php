@@ -18,7 +18,7 @@ class CreateSubareasTable extends Migration
             $table->string('name');
             $table->string('observacion');
 
-            $table->integer('id_area')->unsigned();
+            $table->integer('id_area')->unsigned()->nullable();
             $table->foreign('id_area')->references('id')->on('areas');
 
 

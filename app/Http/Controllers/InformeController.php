@@ -3,6 +3,10 @@
 namespace Sanleo\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Sanleo\Curso;
+use Sanleo\Alumno;
+use Sanleo\User;
+use Sanleo\Informe;
 
 class InformeController extends Controller
 {
@@ -13,7 +17,9 @@ class InformeController extends Controller
      */
     public function index()
     {
-        //
+        
+        $informes = Informe::orderBy('periodo','DESC')->paginate();;
+        return view('informes.index', compact('informes'));
     }
 
     /**
@@ -23,7 +29,8 @@ class InformeController extends Controller
      */
     public function create()
     {
-        //
+        return view('informes.create', compact('informes'));
+
     }
 
     /**
@@ -34,7 +41,10 @@ class InformeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $informe = new Informe;
+        $informe->name  = $request->name;
+        $informe->save();
+        return redirect()->route('informes.index')->with('info', 'Informe agregado exitosamente');
     }
 
     /**
@@ -45,7 +55,8 @@ class InformeController extends Controller
      */
     public function show($id)
     {
-        //
+        $informes = Informe::find($id);
+        return view('informes.show', compact('informes'));
     }
 
     /**
@@ -56,7 +67,8 @@ class InformeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $informes = Informe::find($id);
+        return view('informes.edit', compact('informes'));
     }
 
     /**
@@ -68,7 +80,11 @@ class InformeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $informe = Informe::find($id);
+
+        $informe->name  = $request->name;
+        $informe->save();
+        return redirect()->route('informes.index')->with('message_edit', 'Informe editado exitosamente');
     }
 
     /**
@@ -79,6 +95,8 @@ class InformeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $informe = Informe::find($id);
+        $informe->delete();
+        return back()->with('message', 'Informe eliminado exitosamente');
     }
 }

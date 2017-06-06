@@ -17,6 +17,7 @@ class CursoController extends Controller
      */
     public function index()
     {
+       
         $cursos = Curso::orderBy('id','DESC')->paginate();;
         return view('cursos.index', compact('cursos'));
 

@@ -3,6 +3,12 @@
 namespace Sanleo\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Sanleo\Curso;
+use Sanleo\Alumno;
+use Sanleo\User;
+use Sanleo\Informe;
+use Sanleo\Area;
+use Sanleo\Subarea;
 
 class SubareaController extends Controller
 {
@@ -13,7 +19,8 @@ class SubareaController extends Controller
      */
     public function index()
     {
-        //
+        $subareas = Subarea::orderBy('name','DESC')->paginate();;
+        return view('subareas.index', compact('subareas'));
     }
 
     /**
@@ -23,7 +30,8 @@ class SubareaController extends Controller
      */
     public function create()
     {
-        //
+        return view('subareas.create', compact('subareas'));
+
     }
 
     /**
@@ -34,7 +42,13 @@ class SubareaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $subarea = new Subarea;
+        $subarea->name  = $request->name;
+        $subarea->observacion  = $request->observacion;
+        $subarea->id_area = $request->id_area;
+
+        $subarea->save();
+        return redirect()->route('subareas.index')->with('info', 'Sub area agregada exitosamente');
     }
 
     /**
@@ -45,7 +59,8 @@ class SubareaController extends Controller
      */
     public function show($id)
     {
-        //
+        $subarea = Subarea::find($id);
+        return view('subareas.show', compact('subareas'));
     }
 
     /**
@@ -56,7 +71,8 @@ class SubareaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $subareas = Subarea::find($id);
+        return view('subareas.edit', compact('subareas'));
     }
 
     /**
@@ -68,7 +84,13 @@ class SubareaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $subarea = Subarea::find($id);
+
+        $subarea->name  = $request->name;
+        $subarea->observacion  = $request->obervacion;
+        $subarea->id_area = $request->id_area;
+        $subarea->save();
+        return redirect()->route('subareas.index')->with('message_edit', 'Sub area editada exitosamente');
     }
 
     /**
@@ -79,6 +101,8 @@ class SubareaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subarea = Subarea::find($id);
+        $subarea->delete();
+        return back()->with('message', 'Sub area eliminada exitosamente');
     }
 }
