@@ -2,7 +2,7 @@
     <div class="col-md-4">
     </div>
     <div class="col-md-4">
-        {!! Form::open(['route'=>'buscar_usuario']) !!}
+        {!! Form::open(['route'=>'users.search']) !!}
         {!! Form::text('busqueda') !!}
         {!! Form::submit('Buscar', ['class' => 'btn btn-default'])!!}
         {!! Form::close() !!}

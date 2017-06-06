@@ -16,6 +16,5 @@
 
     </div>
     <div class="col-xs-12 col-sm-4">
-      nada
     </div>
 @endsection

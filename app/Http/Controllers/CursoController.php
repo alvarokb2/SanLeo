@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Sanleo\Curso;
 use Sanleo\User;
 use Sanleo\Http\Requests\CursoRequest;
+use Sanleo\CursoUser;
+use Illuminate\Support\Facades\Auth;
 
 class CursoController extends Controller
 {
@@ -17,8 +19,8 @@ class CursoController extends Controller
      */
     public function index()
     {
-       
-        $cursos = Curso::orderBy('id','DESC')->paginate();;
+        $cursos = Curso::orderBy('id','ASC')->paginate();;
+
         return view('cursos.index', compact('cursos'));
 
     }
@@ -41,12 +43,17 @@ class CursoController extends Controller
      */
     public function store(CursoRequest $request)
     {
-        $curso = new Curso;
-        $curso->name  = $request->name;
-        $curso->id_user = $request->id_user;
+        $curso = Curso::create([
+            'name' => $request->name
+        ]);
         $curso->save();
+        $cursouser = CursoUser::create([
+            'id_curso' => $curso->id,
+            'id_user' => Auth::user()->id,
+        ]);
+        $cursouser->save();
         return redirect()->route('cursos.index')->with('info', 'Curso agregado exitosamente');
-    }
+  }
 
     /**
      * Display the specified resource.
@@ -84,7 +91,6 @@ class CursoController extends Controller
         $curso = Curso::find($id);
 
         $curso->name  = $request->name;
-        $curso->id_user = $request->id_user;
         $curso->save();
         return redirect()->route('cursos.index')->with('message_edit', 'Curso editado exitosamente');
     }

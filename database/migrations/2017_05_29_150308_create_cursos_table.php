@@ -17,8 +17,6 @@ class CreateCursosTable extends Migration
             $table->increments('id');
             $table->string('name');
 
-            $table->integer('id_user')->unsigned()->nullable();
-
             $table->timestamps();
         });
     }
