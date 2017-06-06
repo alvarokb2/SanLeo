@@ -30,6 +30,13 @@ Route::post('/guardar_usuario', 'AdminController@guardar_usuario')->name('guarda
 Route::get('/informes', 'AdminController@informes')->name('informes');
 
 
+
+//Rutas para los controladores
+Route::resource('informes','InformeController');
+Route::resource('areas','AreaController');
+Route::resource('subareas','SubareaController');
+Route::resource('items','ItemController');
+
 //Rutas para cursos
 Route::resource('alumnos','AlumnoController');
 
@@ -40,3 +47,4 @@ Route::resource('cursos', 'CursoController');
 
 Route::resource('users', 'UserController');
 Route::post('/buscar_usuario', 'UserController@search')->name('users.search');
+

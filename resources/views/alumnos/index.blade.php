@@ -34,8 +34,8 @@
                     <td>{{ $alumno->id_curso}}</td>
                     <td>{{ $alumno->id_user}}</td>
 
-                    <td>INFORMES
-                        <!--  <a href=" route('informes.index', $informe->id) " class="btn btn-default">INFOFMES</a> -->
+                    <td>
+                        <a href=" {{route('informes.index')}} " class="btn btn-default">INFORMES</a>
                     </td>
                     <td>
                         <a href="{{ route('alumnos.edit', $alumno->id) }} " class="btn btn-default">Editar</a>

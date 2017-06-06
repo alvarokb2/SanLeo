@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Subarea extends Model
 {
     protected $table = 'subareas';
-    protected $fillable = ['name','id_area', 'obervacion'];
+    protected $fillable = ['name', 'observacion', 'id_area'];
     protected $guarded = ['id'];
 
 

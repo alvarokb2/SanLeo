@@ -17,7 +17,7 @@ class CreateItemsTable extends Migration
             $table->increments('id');
             $table->string('name');
 
-            $table->integer('id_subarea')->unsigned();
+            $table->integer('id_subarea')->unsigned()>nullable();
             $table->foreign('id_subarea')->references('id')->on('subareas');
 
             $table->timestamps();

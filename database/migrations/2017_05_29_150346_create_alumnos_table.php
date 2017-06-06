@@ -19,7 +19,7 @@ class CreateAlumnosTable extends Migration
             $table->string('edad');
             $table->string('fecha_nacimiento');
 
-            $table->integer('id_curso')->unsigned();
+            $table->integer('id_curso')->unsigned()->nullable();
             $table->foreign('id_curso')->references('id')->on('cursos');
 
             $table->integer('id_apoderado')->unsigned()->nullable();
