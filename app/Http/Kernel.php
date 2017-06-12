@@ -57,5 +57,8 @@ class Kernel extends HttpKernel
         'guest' => \Sanleo\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'admin' => \Sanleo\Http\Middleware\AdminRol::class,
+        'educadora' => \Sanleo\Http\Middleware\EducadoraRol::class,
+        'apoderado' => \Sanleo\Http\Middleware\ApoderadoRol::class,
+        'directora' => \Sanleo\Http\Middleware\DirectoraRol::class,
     ];
 }

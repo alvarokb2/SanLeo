@@ -11,13 +11,5 @@
     {!! Form::text('fecha_nacimiento', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-    {!! Form::label('id_curso', 'Nombre del curso') !!}
-    {!! Form::text('id_curso', null, ['class' => 'form-control']) !!}
-</div>
-<div class="form-group">
-    {!! Form::label('id_apoderado', 'Nombre apoderado') !!}
-    {!! Form::text('id_apoderado', null, ['class' => 'form-control']) !!}
-</div>
-<div class="form-group">
     {!! Form::submit('ENVIAR', ['class' => 'btn btn-primary']) !!}
 </div>

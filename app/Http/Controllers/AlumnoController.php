@@ -18,7 +18,7 @@ class AlumnoController extends Controller
     public function index()
     {
         $alumnos = Alumno::orderBy('id','DESC')->paginate();;
-        return view('alumnos.index', compact('alumnos'));
+        return view('educadora.alumnos.index', compact('alumnos'));
 
     }
 
@@ -29,7 +29,7 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        return view('alumnos.create', compact('alumnos'));
+        return view('educadora.alumnos.create', compact('alumnos'));
     }
 
     /**
@@ -59,7 +59,7 @@ class AlumnoController extends Controller
     public function show($id)
     {
         $alumnos = Alumno::find($id);
-        return view('alumnos.show', compact('alumnos'));
+        return view('educadora.alumnos.show', compact('alumnos'));
     }
 
     /**
@@ -71,7 +71,7 @@ class AlumnoController extends Controller
     public function edit($id)
     {
         $alumnos = Alumno::find($id);
-        return view('alumnos.edit', compact('alumnos'));
+        return view('educadora.alumnos.edit', compact('alumnos'));
     }
 
     /**

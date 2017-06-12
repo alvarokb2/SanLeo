@@ -7,10 +7,10 @@
             <a href="{{ route('alumnos.index') }}" class="btn btn-default pull-right">Ir a lista de alumnos
             </a>
         </h2>
-        @include('alumnos.partials.error')
+        @include('educadora.alumnos.partials.error')
         {!! Form::model($alumnos, ['route' => ['alumnos.update', $alumnos->id], 'method' => 'PUT']) !!}
 
-        @include('alumnos.partials.form')
+        @include('educadora.alumnos.partials.form')
 
         {!! Form::close() !!}
 

@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CursoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('educadora')->except('index');
+        $this->middleware('directora')->only('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +27,7 @@ class CursoController extends Controller
     {
         $cursos = Curso::orderBy('id','ASC')->paginate();;
 
-        return view('cursos.index', compact('cursos'));
+        return view('educadora.cursos.index', compact('cursos'));
 
     }
 
@@ -33,7 +39,7 @@ class CursoController extends Controller
      */
     public function create()
     {
-        return view('cursos.create', compact('cursos'));
+        return view('educadora.cursos.create', compact('cursos'));
     }
 
     /**
@@ -66,7 +72,7 @@ class CursoController extends Controller
     {
         $user = User::findOrFail($id);
         $cursos = $user->cursos()->get();
-        return view('cursos.index', compact('cursos'));
+        return view('educadora.cursos.index', compact('cursos'));
     }
 
     /**
@@ -78,7 +84,7 @@ class CursoController extends Controller
     public function edit($id)
     {
         $cursos = Curso::find($id);
-        return view('cursos.edit', compact('cursos'));
+        return view('educadora.cursos.edit', compact('cursos'));
     }
 
     /**

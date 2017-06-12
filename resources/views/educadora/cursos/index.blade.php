@@ -10,7 +10,7 @@
             Lista de cursos
             <a href="{{ route('cursos.create') }}" class="btn btn-primary pull-right">Nuevo</a>
         </h2>
-            @include('cursos.partials.info')
+            @include('educadora.cursos.partials.info')
         <table class="table">
             <thead>
             <tr>

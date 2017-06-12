@@ -8,10 +8,10 @@
             </a>
         </h2>
 
-        @include('cursos.partials.error')
+        @include('educadora.cursos.partials.error')
         {!! Form::open(['route' => 'cursos.store']) !!}
 
-        @include('cursos.partials.form')
+        @include('educadora.cursos.partials.form')
 
         {!! Form::close() !!}
     </div>

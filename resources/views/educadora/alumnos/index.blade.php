@@ -10,7 +10,7 @@
             Alumnos
             <a href="{{ route('alumnos.create') }}" class="btn btn-primary pull-right">Nuevo</a>
         </h2>
-            @include('alumnos.partials.info')
+            @include('educadora.alumnos.partials.info')
         <table class="table">
             <thead>
             <tr>
